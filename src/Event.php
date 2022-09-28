@@ -17,6 +17,7 @@ use Carbon\Carbon;
  * @property Carbon $event_end
  * @property DateTime $created_at
  * @property DateTime $updated_at
+ * @property array $users
  */
 class Event extends AbstractModel
 {
@@ -57,6 +58,7 @@ class Event extends AbstractModel
         $event->user_id = $actorId;
         $event->event_start = new Carbon($event_start);
         $event->event_end = new Carbon($event_end);
+        $event->users = [];
 
         return $event;
     }
@@ -79,6 +81,12 @@ class Event extends AbstractModel
         $this->event_end = new Carbon($event_end);
     }
 
+    public function subscribe($user) {
+        if(!\in_array($user, $this->users, false)) {
+            $this->users[] = $user;
+        }
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -87,4 +95,11 @@ class Event extends AbstractModel
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
