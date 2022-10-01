@@ -19,8 +19,6 @@ class EventsListController extends AbstractListController
     public $include = ['user'];
     protected function data(Request $request, Document $document)
     {
-        //$relations = $this->extractInclude($request);
-        //var_dump($request);
         $actor = $request->getAttribute('actor');
 
         if (!$actor->can('event.view')) {

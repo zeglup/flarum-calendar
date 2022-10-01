@@ -25,13 +25,13 @@ export default class EventFragment extends Component {
   view() {
       return <div>
         <p id="eventdescription"/>
-        <p>Hosted by: <a href={app.route.user(this.attrs.event.user())} config={m.route}>
-          {userOnline(this.attrs.event.user())}
+        <p style="text-transform: capitalize;">Créé par : <a href={app.route.user(this.attrs.event.user())} config={m.route}>
           {username(this.attrs.event.user())}
         </a></p>
         <p>
-          Starts: { fullTime(this.attrs.event.event_start()) } <br/>
-          Ends: { fullTime(this.attrs.event.event_end())}
+          Début : { fullTime(this.attrs.event.event_start()) } <br/>
+          Fin : { fullTime(this.attrs.event.event_end())}
+
         </p>
         {(app.session.user && (app.session.user.canModerateEvents || this.attrs.event.user.id === app.session.user.id)) ?
           (<div>
@@ -72,5 +72,7 @@ export default class EventFragment extends Component {
       //app.history.back();
     });
   }
+  subscribeEvent() {
 
+  }
 }

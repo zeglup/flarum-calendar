@@ -1,2 +1,192 @@
-module.exports=function(e){var r={};function n(a){if(r[a])return r[a].exports;var t=r[a]={i:a,l:!1,exports:{}};return e[a].call(t.exports,t,t.exports,n),t.l=!0,t.exports}return n.m=e,n.c=r,n.d=function(e,r,a){n.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:a})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,r){if(1&r&&(e=n(e)),8&r)return e;if(4&r&&"object"==typeof e&&e&&e.__esModule)return e;var a=Object.create(null);if(n.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:e}),2&r&&"string"!=typeof e)for(var t in e)n.d(a,t,function(r){return e[r]}.bind(null,t));return a},n.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(r,"a",r),r},n.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},n.p="",n(n.s=36)}({20:function(e,r){e.exports=flarum.core.compat["components/BasicsPage"]},36:function(e,r,n){"use strict";n.r(r);var a=n(5),t=n(20),o=n.n(t);app.initializers.add("webbinaro/flarum-calendar",(function(){console.log("[webbinaro/flarum-calendar] Hello, admin!"),app.extensionData.for("webbinaro-calendar").registerPermission({icon:"fas fa-calendar",label:app.translator.trans("flarum-calendar.admin.permissions.view"),permission:"event.view",allowGuest:!0},"view",95).registerPermission({icon:"fas fa-calendar-plus",label:app.translator.trans("flarum-calendar.admin.permissions.add"),permission:"event.create"},"start",95).registerPermission({icon:"fas fa-calendar-times",label:app.translator.trans("flarum-calendar.admin.permissions.moderate"),permission:"event.moderate"},"moderate",95),Object(a.extend)(o.a.prototype,"homePageItems",(function(e){e.add("events",{path:"/events",label:app.translator.trans("flarum-calendar.admin.basics.homepage")})}))}))},5:function(e,r){e.exports=flarum.core.compat.extend}});
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./admin.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./admin.js":
+/*!******************!*\
+  !*** ./admin.js ***!
+  \******************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_admin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/admin */ "./src/admin/index.js");
+/* empty/unused harmony star reexport */
+
+/***/ }),
+
+/***/ "./src/admin/index.js":
+/*!****************************!*\
+  !*** ./src/admin/index.js ***!
+  \****************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/BasicsPage */ "flarum/components/BasicsPage");
+/* harmony import */ var flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_1__);
+
+
+app.initializers.add('webbinaro/flarum-calendar', function () {
+  console.log('[webbinaro/flarum-calendar] Hello, admin!');
+  app.extensionData["for"]('webbinaro-calendar')
+  /*.registerSetting(
+    {
+      setting: 'some-key', // This is the key the settings will be saved under in the settings table in the database.
+      label: app.translator.trans('flarum-calendar.admin.title'), // The label to be shown letting the admin know what the setting does.
+      type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
+    },
+    30 // Optional: Priority
+  )*/
+  .registerPermission({
+    icon: 'fas fa-calendar',
+    // Font-Awesome Icon
+    label: app.translator.trans('flarum-calendar.admin.permissions.view'),
+    // Permission Label
+    permission: 'event.view',
+    // Actual permission name stored in database (and used when checking permission).
+    allowGuest: true
+  }, 'view', // Category permission will be added to on the grid
+  95 // Optional: Priority
+  ).registerPermission({
+    icon: 'fas fa-calendar-plus',
+    // Font-Awesome Icon
+    label: app.translator.trans('flarum-calendar.admin.permissions.add'),
+    // Permission Label
+    permission: 'event.create' // Actual permission name stored in database (and used when checking permission).
+
+  }, 'start', // Category permission will be added to on the grid
+  95 // Optional: Priority
+  ).registerPermission({
+    icon: 'fas fa-calendar-times',
+    // Font-Awesome Icon
+    label: app.translator.trans('flarum-calendar.admin.permissions.moderate'),
+    // Permission Label
+    permission: 'event.moderate' // Actual permission name stored in database (and used when checking permission).
+
+  }, 'moderate', // Category permission will be added to on the grid
+  95 // Optional: Priority
+  );
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'homePageItems', function (items) {
+    items.add('events', {
+      path: '/events',
+      label: app.translator.trans('flarum-calendar.admin.basics.homepage')
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "flarum/components/BasicsPage":
+/*!**************************************************************!*\
+  !*** external "flarum.core.compat['components/BasicsPage']" ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['components/BasicsPage'];
+
+/***/ }),
+
+/***/ "flarum/extend":
+/*!***********************************************!*\
+  !*** external "flarum.core.compat['extend']" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['extend'];
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=admin.js.map

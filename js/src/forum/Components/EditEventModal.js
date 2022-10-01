@@ -9,6 +9,7 @@ const user = Stream('');
 const description = Stream('');
 const event_start = Stream();
 const event_end = Stream();
+const mission_id = Stream();
 
 /**
  * THis builds event details based on a FullCalendar concept of object.  CalendarPage talks to api, sends us FC payload
@@ -24,6 +25,7 @@ export default class EditEventModal extends Modal {
         user(event.user())
         event_start(event.event_start());
         event_end(event.event_end() ? event.event_end() : event.event_start());
+        mission_id(event.mission_id())
       }
     }
 
@@ -50,17 +52,21 @@ export default class EditEventModal extends Modal {
     return [
       <div className="Modal-body">
         <div className="Form-group">
-          <label className="label">What</label>
+          <label className="label">Titre</label>
           <input type="text" name="title" className="FormControl" bidi={name} />
         </div>
         <div className="Form-group">
-          <label className="label">When</label>
+          <label className="label">Mission ID</label>
+          <input type="text" name="mission_id" className="FormControl" bidi={mission_id} />
+        </div>
+        <div className="Form-group">
+          <label className="label">Quand</label>
           <div className="PollModal--date" >
             <input id="startpicker" style="opacity: 1; color: inherit" className="FormControl" data-input />
           </div>
         </div>
         <div className="Form-group">
-          <label className="label">Details</label>
+          <label className="label">Détails</label>
           <textarea name="description" className="FormControl" bidi={description} />
           <small>You may use markdown</small>
         </div>
@@ -109,7 +115,8 @@ export default class EditEventModal extends Modal {
       name: name(),
       description: description(),
       event_start: event_start(),
-      event_end: event_end()
+      event_end: event_end(),
+      mission_id: mission_id()
     }).then(this.hide());
 
   }

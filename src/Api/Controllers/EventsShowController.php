@@ -19,7 +19,6 @@ class EventsShowController extends AbstractShowController
         $actor->assertCan('event.view');
 
         $id = Arr::get($request->getQueryParams(), 'id');
-        //$relations = $this->extractInclude($request);
         return Event::findOrFail($id);
     }
 }
