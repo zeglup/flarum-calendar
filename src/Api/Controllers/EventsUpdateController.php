@@ -27,7 +27,7 @@ class EventsUpdateController extends AbstractShowController
         if(! $actor->can('event.moderate') && $actor->id !== $event->user->id ) {
             throw new PermissionDeniedException("non moderator unowned event");
         }
-        $event->replace($requestData['name'],$requestData['description'],$requestData['event_start'], $requestData['event_end']);
+        $event->replace($requestData['name'],$requestData['description'],$requestData['event_start']);
         $event->save();
         return $event;
     }

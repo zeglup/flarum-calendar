@@ -37,7 +37,7 @@ class EventsCreateController extends AbstractCreateController
             throw new PermissionDeniedException();
         }
         $requestData = Arr::get($request->getParsedBody(), 'data.attributes');
-        $event = Event::build( $requestData['name'], $requestData['description'], $actor->id, $requestData['event_start'], $requestData['event_end'], $requestData['mission_id'] );
+        $event = Event::build( $requestData['name'], $requestData['description'], $actor->id, $requestData['event_start']);
         if(true === $event->saveOrFail()) {
             $this->events->dispatch(
                 new Event\Created($event, $actor)
