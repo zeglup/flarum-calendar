@@ -3,13 +3,13 @@ import Button from 'flarum/components/Button';
 import flatpickr from 'flatpickr';
 import Stream from 'flarum/utils/Stream';
 require("flatpickr/dist/flatpickr.css");
+import { French } from "flatpickr/dist/l10n/fr.js"
+import dayjs from 'dayjs';
 
 const name = Stream('');
 const user = Stream('');
 const description = Stream('');
 const event_start = Stream();
-const event_end = Stream();
-const mission_id = Stream();
 
 /**
  * THis builds event details based on a FullCalendar concept of object.  CalendarPage talks to api, sends us FC payload
@@ -17,28 +17,17 @@ const mission_id = Stream();
 export default class EditEventModal extends Modal {
     oninit(vnode) {
       super.oninit(vnode);
-
+      event_start(dayjs('now'));
       if (this.attrs.event) {
         const event = this.attrs.event;
         name(event.name());
         description(event.description());
         user(event.user())
         event_start(event.event_start());
-        event_end(event.event_end() ? event.event_end() : event.event_start());
         mission_id(event.mission_id())
       }
     }
 
-  /**
-   * Builder to create new modal *with empty event* but pre-populated date field.
-    * @param startDate
-   * @returns {EditEventModal}
-   *//*
-  withStart(startDate)
-  {
-    event_start(startDate);
-    return this;
-  }*/
 
   title() {
     return name() ? "Edit event details" : "Create new calendar event";
@@ -54,10 +43,6 @@ export default class EditEventModal extends Modal {
         <div className="Form-group">
           <label className="label">Titre</label>
           <input type="text" name="title" className="FormControl" bidi={name} />
-        </div>
-        <div className="Form-group">
-          <label className="label">Mission ID</label>
-          <input type="text" name="mission_id" className="FormControl" bidi={mission_id} />
         </div>
         <div className="Form-group">
           <label className="label">Quand</label>
@@ -83,14 +68,15 @@ export default class EditEventModal extends Modal {
 
   configDatePicker(el) {
     flatpickr(el, {
+      locale: French,
       enableTime: true,
-      dateFormat: 'Y-m-d H:i',
-      mode: "range",
-      defaultDate: [flatpickr.parseDate(event_start(),"Y-m-d h:i K"),flatpickr.parseDate(event_end(),"Y-m-d h:i K")],
+      dateFormat: 'Y-m-d HH:i',
+      mode: "single",
+      defaultDate: [flatpickr.parseDate(event_start(),"Y-m-d h:i K")],
       inline: true,
+      time_24hr: true,
       onChange: dates => {
         event_start(dates[0]);
-        event_end(dates[1])
       }
     });
   }
@@ -115,8 +101,6 @@ export default class EditEventModal extends Modal {
       name: name(),
       description: description(),
       event_start: event_start(),
-      event_end: event_end(),
-      mission_id: mission_id()
     }).then(this.hide());
 
   }
