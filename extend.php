@@ -41,5 +41,7 @@ return [
         ->patch('/events/{id}','events.edit', ControllersAlias\EventsUpdateController::class)
         ->delete('/events/{id}','events.delete', ControllersAlias\EventsDeleteController::class),
 
+    new Extend\Locales(__DIR__ . '/resources/locale'),
+
     new EventResourceRegister(),
 ];
