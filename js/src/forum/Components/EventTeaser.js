@@ -54,11 +54,6 @@ export default class EventTeaser extends Modal {
             {this.alertAttrs ? <div className="Modal-alert">{Alert.component(this.alertAttrs)}</div> : ''}
             <div className="Modal-body">
               <EventFragment event={this.attrs.event} />
-              <p>
-                {LinkButton.component({
-                  href: app.route.advevent(this.attrs.event),
-                }, app.translator.trans('flarum-calendar.forum.event.details'))}
-              </p>
             </div>
           </form>
         </div>

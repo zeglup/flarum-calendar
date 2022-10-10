@@ -3,7 +3,6 @@ import Page from 'flarum/components/Page';
 import ItemList from 'flarum/utils/ItemList';
 import listItems from 'flarum/helpers/listItems';
 import IndexPage from 'flarum/components/IndexPage';
-import SelectDropdown from 'flarum/components/SelectDropdown';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -12,10 +11,7 @@ import EventTeaser from "./EventTeaser";
 import Button from 'flarum/components/Button'
 import EditEventModal from "./EditEventModal";
 import LogInModal from 'flarum/components/LogInModal'
-import Stream from 'flarum/utils/Stream';
-
-const calendar = Stream();
-const events = Stream();
+import frLocale from '@fullcalendar/core/locales/fr';
 
 export default class CalendarPage extends Page {
   oninit(vnode) {
@@ -51,7 +47,6 @@ export default class CalendarPage extends Page {
    */
   sidebarItems() {
     const items = IndexPage.prototype.sidebarItems();
-    // newDiscussion = newEvent
     if(app.session.user){
       if(app.session.user.canStartEvents) {
         items.replace('newDiscussion',
@@ -90,6 +85,7 @@ export default class CalendarPage extends Page {
     const calendarEl = document.getElementById('calendar');
     const openModal = this.openCreateModal.bind(this);
     const calendar = new Calendar(calendarEl, {
+      locale: frLocale,
       headerToolbar: {center: 'dayGridMonth,listYear'}, // buttons for switching between views
       initialView: 'dayGridMonth',
       plugins: [dayGridPlugin, interactionPlugin, listPlugin],
@@ -135,7 +131,6 @@ export default class CalendarPage extends Page {
     console.log(eventData);
     return {
         "title": eventData.name(),
-        "end": eventData.event_end(),
         "start": eventData.event_start(),
         "extendedProps": {
           "description": eventData.description(),

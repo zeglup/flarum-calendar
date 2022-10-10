@@ -1,12 +1,9 @@
 import Component from 'flarum/common/Component';
 import Button from 'flarum/common/components/Button';
 import username from 'flarum/helpers/username';
-import User from 'flarum/models/User'
-import userOnline from 'flarum/helpers/userOnline';
-import avatar from 'flarum/helpers/avatar';
 import EditEventModal from "./EditEventModal";
-import Alert from 'flarum/common/components/Alert'
 import fullTime from 'flarum/helpers/fullTime';
+import dayjs from 'dayjs';
 
 export default class EventFragment extends Component {
 
@@ -23,16 +20,19 @@ export default class EventFragment extends Component {
   }
 
   view() {
+    require('dayjs/locale/fr')
+    dayjs.locale('fr')
+    var localizedFormat = require('dayjs/plugin/localizedFormat')
+    dayjs.extend(localizedFormat)
       return <div>
-        <p id="eventdescription"/>
-        <p>Hosted by: <a href={app.route.user(this.attrs.event.user())} config={m.route}>
-          {userOnline(this.attrs.event.user())}
-          {username(this.attrs.event.user())}
-        </a></p>
         <p>
-          Starts: { fullTime(this.attrs.event.event_start()) } <br/>
-          Ends: { fullTime(this.attrs.event.event_end())}
+          <b>Début</b> : <span style="text-transform: capitalize;">{ dayjs(this.attrs.event.event_start()).format('LLLL') }</span> <br/>
         </p>
+        <p id="eventdescription"/>
+
+        Créé par <span style="text-transform: capitalize;"><a href={app.route.user(this.attrs.event.user())} config={m.route}>
+          {username(this.attrs.event.user())}
+        </a></span>
         {(app.session.user && (app.session.user.canModerateEvents || this.attrs.event.user.id === app.session.user.id)) ?
           (<div>
               {Button.component({
@@ -72,5 +72,4 @@ export default class EventFragment extends Component {
       //app.history.back();
     });
   }
-
 }

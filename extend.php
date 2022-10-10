@@ -11,19 +11,12 @@
 
 namespace Webbinaro\AdvCalendar;
 
+
 use Flarum\Extend;
-use Flarum\User\User;
 use Webbinaro\AdvCalendar\Api\Controllers as ControllersAlias;
-use Illuminate\Events\Dispatcher;
 use Webbinaro\AdvCalendar\Integrations\EventResourceRegister;
-use Webbinaro\AdvCalendar\Integrations\SitemapsResource;
-use Webbinaro\AdvCalendar\Listeners;
 
 return [
-
-    (new Extend\Model(User::class))
-        ->belongsToMany('event', Event::class, 'events_users', 'user_id', 'event_id'),
-
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/resources/less/forum.less')
@@ -44,14 +37,11 @@ return [
     	->get('/events','events.index', ControllersAlias\EventsListController::class)
     	->get('/events/{id}','events.show', ControllersAlias\EventsShowController::class)
     	->post('/events','events.create', ControllersAlias\EventsCreateController::class)
+        ->post('/events/{id}/subscribe','events.subscribe', ControllersAlias\EventsSubscribeController::class)
         ->patch('/events/{id}','events.edit', ControllersAlias\EventsUpdateController::class)
         ->delete('/events/{id}','events.delete', ControllersAlias\EventsDeleteController::class),
 
     new Extend\Locales(__DIR__ . '/resources/locale'),
 
-    (new Extend\Event)
-        ->subscribe(Listeners\AdvEventListener::class),
-
     new EventResourceRegister(),
-
 ];

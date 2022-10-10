@@ -6,6 +6,7 @@ use Flarum\Database\AbstractModel;
 use Flarum\Database\ScopeVisibilityTrait;
 use Flarum\User\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -14,10 +15,8 @@ use Carbon\Carbon;
  * @property User $user
  * @property int $user_id
  * @property Carbon $event_start
- * @property Carbon $event_end
- * @property DateTime $created_at
- * @property DateTime $updated_at
- * @property array $users
+ * @property \DateTime $created_at
+ * @property \DateTime $updated_at
  */
 class Event extends AbstractModel
 {
@@ -30,8 +29,7 @@ class Event extends AbstractModel
     protected $dates = [
         'created_at',
         'updated_at',
-        'event_start',
-        'event_end'
+        'event_start'
     ];
 
     // The default sort field and order to use.
@@ -45,11 +43,10 @@ class Event extends AbstractModel
      * @param $description
      * @param $actorId
      * @param  $event_start
-     * @param  $event_end
      *
      * @return static
      */
-    public static function build($name, $description, $actorId, $event_start,$event_end)
+    public static function build($name, $description, $actorId, $event_start)
     {
         $event = new static();
 
@@ -57,8 +54,6 @@ class Event extends AbstractModel
         $event->description = $description;
         $event->user_id = $actorId;
         $event->event_start = new Carbon($event_start);
-        $event->event_end = new Carbon($event_end);
-        $event->users = [];
 
         return $event;
     }
@@ -69,37 +64,23 @@ class Event extends AbstractModel
      * @param $description
      * @param $actorId
      * @param  $event_start
-     * @param  $event_end
      *
      * @return static
      */
-    public function replace($name, $description, $event_start,$event_end)
+    public function replace($name, $description, $event_start)
     {
         $this->name = $name;
         $this->description = $description;
         $this->event_start = new Carbon($event_start);
-        $this->event_end = new Carbon($event_end);
-    }
 
-    public function subscribe($user) {
-        if(!\in_array($user, $this->users, false)) {
-            $this->users[] = $user;
-        }
+        return $this;
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function users()
-    {
-        return $this->hasMany(User::class);
     }
 }
