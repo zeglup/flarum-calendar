@@ -24,7 +24,6 @@ export default class EditEventModal extends Modal {
         description(event.description());
         user(event.user())
         event_start(event.event_start());
-        mission_id(event.mission_id())
       }
     }
 
