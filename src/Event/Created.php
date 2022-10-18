@@ -25,11 +25,18 @@ class Created
     public $actor;
 
     /**
-     * @param Event $event
-     * @param User $actor
+     * @var User
      */
-    public function __construct(Event $event, User $actor = null)
+    public $discussionUrl;
+
+    /**
+     * @param Event $event
+     * @param string $discussionUrl
+     * @param User|null $actor
+     */
+    public function __construct(Event $event, string $discussionUrl, User $actor = null)
     {
+        $this->discussionUrl = $discussionUrl;
         $this->event = $event;
         $this->actor = $actor;
     }

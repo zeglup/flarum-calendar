@@ -44,16 +44,16 @@ export default class EditEventModal extends Modal {
           <input type="text" name="title" className="FormControl" bidi={name} />
         </div>
         <div className="Form-group">
+          <label className="label">Lien vers mission</label>
+          <input name="description" className="FormControl" bidi={description} />
+        </div>
+        <div className="Form-group">
           <label className="label">Quand</label>
           <div className="PollModal--date" >
             <input id="startpicker" style="opacity: 1; color: inherit" className="FormControl" data-input />
           </div>
         </div>
-        <div className="Form-group">
-          <label className="label">Détails</label>
-          <textarea name="description" className="FormControl" bidi={description} />
-          <small>You may use markdown</small>
-        </div>
+
         <div className="Form-group">
           {Button.component({
             type: 'submit',
@@ -90,7 +90,7 @@ export default class EditEventModal extends Modal {
     e.preventDefault();
     if (!name() || !description() ) {
 
-      app.alerts.show("Events require a name and description");
+      app.alerts.show("Nom et lien vers mission obligatoire");
       return;
     }
     if(!this.attrs.event){
